@@ -11,7 +11,7 @@ export const filterMovesCurrent = (data: Pokemon) => {
           obj.version_group.name === "sword-shield"
       ).length > 0
   );
-  console.log(moves);
+
   return moves;
 };
 
@@ -23,6 +23,19 @@ export const filterSVMoves = (move : Move) => {
         obj.version_group.name === "scarlet-violet" ||
         obj.version_group.name === "sword-shield"
     );
-    console.log(svMoveData[0]);
+
     return svMoveData[0];
+  };
+
+  export const filterNoiseFromDexEntry = (data: string) => {
+    const string = data;
+    console.log(string)
+    const cleanEntry = string.replace('\f', '\n')
+    .replace('\u00ad\n', '')
+    .replace('\u00ad', '')
+    .replace(' -\n', ' - ')
+    .replace('-\n', '-')
+    .replace('\n', ' ');
+    console.log(cleanEntry)
+    return cleanEntry;
   };

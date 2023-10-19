@@ -7,13 +7,12 @@ import { sortMovesByLevel } from "./lib/sorters";
 
 export default async function Home() {
   const pokemon = await getPokemon();
-  console.log(pokemon);
   
 
   const keys = Object.keys(pokemon);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between px-20 bg-pyellow">
+    <main className="flex min-h-screen flex-col items-center justify-between px-20 bg-fire-l">
       <div className="flex flex-col items-center justify-start w-full h-screen bg-pgold ">
         <div className="flex justify-evenly items-center w-full h-1/4 text-white">
           <div className="flex flex-col justify-center w-fit h-fit rounded bg-black p-5">

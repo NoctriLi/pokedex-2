@@ -45,6 +45,5 @@ export const sortMovesByLevel = (moves: Move[]) => {
     )
     return (aDetails?.level_learned_at || 0) - (bDetails?.level_learned_at || 0);
   });
-  console.log(sortedMoves);
   return [...sortedMoves, ...machineMoves, ...tutorMoves];
 };

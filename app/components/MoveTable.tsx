@@ -5,13 +5,13 @@ import { Move, Pokemon } from "../lib/types";
 
 const MoveTable = ({ pokemon }: { pokemon: Pokemon }) => {
   const moves = sortMovesByLevel(filterMovesCurrent(pokemon));
-  console.log(moves)
-  const latestMoves = filterSVMoves(moves);
+
   return (
     <>
       {moves.map((obj, key) => {
+    const latestMoves = filterSVMoves(obj);
 
-        (
+        return (
         <div
           key={key}
           className="flex justify-evenly w-full h-fit border-b border-white/50"
