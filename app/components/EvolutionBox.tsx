@@ -18,12 +18,13 @@ const EvolutionBox = async ({ name, className }: { name: string, className: stri
                   key={key2}
                   className="flex flex-col items-center justify-center w-fit h-fit p-5"
                 >
-                  <div className="flex flex-col items-center justify-center w-fit h-fit">
-                    <p className="p-2">
-                      {obj2.evolutionDetails !== null &&
-                        obj2.evolutionDetails[1]}
+                  {obj2.evolutionDetails !== null &&<div className="flex flex-col items-center justify-center w-fit h-fit">
+                    <p className="">Trigger: </p>
+                    <p className="text-sm capitalize">
+                      
+                        {obj2.evolutionDetails[1]}
                     </p>
-                  </div>
+                  </div>}
                   <div className="flex flex-col items-center justify-center w-fit h-fit p-2">
                     {obj2.evolutionDetails !== null && (
                       <>
@@ -34,14 +35,14 @@ const EvolutionBox = async ({ name, className }: { name: string, className: stri
                       </>
                     )}
                   </div>
-                  <div className="flex flex-col items-center justify-center w-fit h-fit">
+                  <a href={`/pokemon/${obj2.number}`} className="flex flex-col items-center justify-center w-fit h-fit">
                       <p className="capitalize text-xl">{obj2.name}</p>
                     <img
                       src={obj2.picUrl}
                       alt={obj2.name}
                       className="object-contain h-full"
                     />
-                  </div>
+                  </a>
                 </div>
               );
             })}

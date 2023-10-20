@@ -136,7 +136,7 @@ const filterEvolutionDetails = (evolutionDetails) => {
   const keyValues = validKeys.map((key) => filteredDetails[key]);
   const trigger =
     (evolutionDetails.trigger?.name &&
-      "Trigger: " + evolutionDetails.trigger.name.replace("-", " ")) ||
+      evolutionDetails.trigger.name.replace("-", " ")) ||
     null;
 
   return [keyValues, trigger];
