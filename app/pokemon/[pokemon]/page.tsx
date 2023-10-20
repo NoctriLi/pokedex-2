@@ -1,16 +1,16 @@
 import MoveTable from "../../components/MoveTable";
-import { getPokemon, getDexInfo } from "../../lib/getters";
+import { getPokemon, getSpeciesInfo, getEvolutionInfo } from "../../lib/getters";
 import { filterNoiseFromDexEntry } from "@/app/lib/filters";
 import { Main } from "@/app/components/ThemedElements";
 import { decimetersToFeet, hectogramsToLbs } from "@/app/lib/math";
+import EvolutionBox from "@/app/components/EvolutionBox";
 export default async function () {
   const pokemon = await getPokemon();
-  const dexInfo = await getDexInfo(pokemon.name);
+  const dexInfo = await getSpeciesInfo(pokemon.name);
   const genus = dexInfo.genera.find((genus) => genus.language.name === "en")?.genus || "Unknown Pokemon";
   const dexEntry = filterNoiseFromDexEntry(dexInfo.flavor_text_entries.find((entry) => entry.language.name === "en")?.flavor_text || "Unknown Pokemon");
   const weight = hectogramsToLbs(pokemon.weight);
   const height = decimetersToFeet(pokemon.height);
-
   const types = pokemon.types.map((type) => type.type.name);
   if (types.length === 1) {
     types.push(types[0]);
@@ -55,6 +55,7 @@ export default async function () {
 
           <p>{dexEntry}</p>
         </div>
+        <EvolutionBox name={pokemon.name} />
       </div>
       {/* <div className="flex flex-col items-center justify-center w-1/2 h-auto bg-gray-800 text-white text-xl">
 
