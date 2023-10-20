@@ -1,9 +1,9 @@
 // import dummy from "../dummy.json";
 // import dummy2 from "../dummy2.json";
 
-import raltsDex from "../raltsSpecies.json";
-import raltsMain from "../raltsMain.json";
-import raltsEvo from "../raltsEvo.json";
+import raltsDex from "../bulbasaurSpecies.json";
+import raltsMain from "../bulbasaurMain.json";
+import raltsEvo from "../bulbasaurEvo.json";
 
 export const getPokemon = async () => {
   // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
@@ -76,7 +76,7 @@ export const getEvolutionChains = (evolutionChain) => {
 };
 const filterEvolutionDetails = (evolutionDetails) => {
   const filteredDetails = {
-    gender: evolutionDetails.gender === 1 ? "Male" : "Female",
+    gender: evolutionDetails.gender === 2 ? "Male" : evolutionDetails.gender === 1? "Female" : null,
     held_item: evolutionDetails.held_item?.name || null,
     item: evolutionDetails.item?.name || null,
     known_move:

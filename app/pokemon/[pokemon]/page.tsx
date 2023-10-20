@@ -19,14 +19,15 @@ export default async function () {
   const styles = {
     main: `flex justify-between min-h-screen h-fit px-20  bg-${types[0]}-l`,
     box1: `flex flex-col items-center justify-start py-20 w-1/2 min-h-screen  h-fit  bg-${types[0]} text-xl`,
-    box2: `flex flex-col   w-1/2 min-h-screen h-fit  sm:mt-20  bg-${types[1]} text-white text-xl`,
+    box2: `flex flex-col items-center  w-1/2 min-h-screen h-fit  sm:mt-20  bg-${types[1]} text-white text-xl`,
     pokeName: ` text-5xl  capitalize w-full p-5    text-${types[0]}-l  bg-${types[0]}-d `,
     InfoBox: `flex flex-col items-center w-80 h-80 p-5 border-t border-black/50    text-${types[0]}-d bg-${types[0]}-l`,
     type1Box: `flex flex-col items-center justify-center w-1/2 h-1/2 p-5 text-2xl bg-${types[0]}-d text-${types[0]}-l capitalize `,
     type2Box: `flex flex-col items-center justify-center w-1/2 h-1/2 p-5 text-2xl bg-${types[1]}-d text-${types[1]}-l capitalize `,
     descriptionBox: `flex flex-col items-center justify-center w-full h-80 p-5 text-2xl bg-${types[1]}-d text-${types[1]}-l `,
-  };
-
+    evoBox: `flex flex-col items-center justify-center w-fit h-fit p-5 text-base bg-${types[1]}-l text-${types[1]}-d `,
+  }; 
+" flex flex-col items-center w-fit h-fit"
   const keys = Object.keys(pokemon);
 
   return (
@@ -55,7 +56,7 @@ export default async function () {
 
           <p>{dexEntry}</p>
         </div>
-        <EvolutionBox name={pokemon.name} />
+        <EvolutionBox className={styles.evoBox} name={pokemon.name} />
       </div>
       {/* <div className="flex flex-col items-center justify-center w-1/2 h-auto bg-gray-800 text-white text-xl">
 
