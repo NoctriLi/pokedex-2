@@ -4,6 +4,8 @@
 import raltsDex from "../bulbasaurSpecies.json";
 import raltsMain from "../bulbasaurMain.json";
 import raltsEvo from "../bulbasaurEvo.json";
+import { Pokemon, Move, EvolutionChains, EvolutionChain, EvolutionDetails, FilteredDetails } from "../lib/types";
+
 
 export const getPokemon = async () => {
   // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
@@ -20,7 +22,7 @@ export const getSpeciesInfo = async (name: string) => {
 };
 
 export const getEvolutionInfo = async (name: string) => {
-  const info = await raltsEvo;
+  const info: EvolutionChains = await raltsEvo;
   const evolutionChains = getEvolutionChains(info.chain);
   console.log(evolutionChains);
   return evolutionChains;
@@ -37,10 +39,20 @@ export const getPokePicFromNumber = (number: string) => {
   return url;
 };
 
-export const getEvolutionChains = (evolutionChain) => {
-  const array = []
+
+
+const getEvolutionChains = (evolutionChain: EvolutionChain) => {
+
+
+  const array: ({
+    name: string; number: string; picUrl // import dummy2 from "../dummy2.json";
+      : string; evolves_to: any[] | undefined; evolutionDetails: any[];
+  }[] | { name: string; number: string; picUrl: string; evolutionDetails: null; }[])[] = []
   
-  const getEvo = (evolutionChain) => {
+
+
+
+  const getEvo = (evolutionChain:EvolutionChain ) => {
     if (!evolutionChain.evolves_to[0]) {
       console.log(array);
       return;
@@ -54,7 +66,7 @@ export const getEvolutionChains = (evolutionChain) => {
         name: evolutionChain.evolves_to[i].species.name,
         number: number,
         picUrl: picUrl,
-        evolves_to: getEvo(chain, array),
+        evolves_to: getEvo(chain),
         evolutionDetails: filterEvolutionDetails(
           evolutionChain.evolves_to[i].evolution_details[0]
         ),
@@ -74,8 +86,12 @@ export const getEvolutionChains = (evolutionChain) => {
   console.log(evolutionChainArray)
   return evolutionChainArray;
 };
-const filterEvolutionDetails = (evolutionDetails) => {
-  const filteredDetails = {
+
+
+
+
+const filterEvolutionDetails = (evolutionDetails: EvolutionDetails) => {
+  const filteredDetails: FilteredDetails = {
     gender: evolutionDetails.gender === 2 ? "Male" : evolutionDetails.gender === 1? "Female" : null,
     held_item: evolutionDetails.held_item?.name || null,
     item: evolutionDetails.item?.name || null,
@@ -127,11 +143,11 @@ const filterEvolutionDetails = (evolutionDetails) => {
       (evolutionDetails.time_of_day.length > 0 &&
         "Time of day: " + evolutionDetails.time_of_day) ||
       null,
-    trade: (evolutionDetails.trade && "Trade ") || null,
+    trade: (evolutionDetails.trade_species?.name && "Trade ") || null,
     turn_upside_down:
       (evolutionDetails.turn_upside_down && "Turn upside down ") || null,
   };
-  const filteredKeys = Object.keys(filteredDetails);
+  const filteredKeys = Object.keys(filteredDetails) as (keyof typeof filteredDetails)[];
   const validKeys = filteredKeys.filter((key) => filteredDetails[key] !== null);
   const keyValues = validKeys.map((key) => filteredDetails[key]);
   const trigger =

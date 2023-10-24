@@ -1,5 +1,6 @@
 import { get } from "http";
 import { getEvolutionInfo } from "../lib/getters";
+import { ReactElement, JSXElementConstructor, ReactNode, PromiseLikeOfReactNode, Key } from "react";
 
 const EvolutionBox = async ({ name, className }: { name: string, className: string }) => {
   const evolutionsArray = await getEvolutionInfo(name);
@@ -12,7 +13,7 @@ const EvolutionBox = async ({ name, className }: { name: string, className: stri
             key={key}
             className="flex  items-center justify-center w-fit h-fit border border-black"
           >
-            {obj.map((obj2, key2) => {
+            {obj.map((obj2: { evolutionDetails: any[][] | null; number: number | string; name: string | undefined; picUrl: string | undefined; }, key2: Key | null | undefined) => {
               return (
                 <div
                   key={key2}
