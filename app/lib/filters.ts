@@ -2,8 +2,8 @@ import { Pokemon } from "../lib/types";
 import { Move } from "../lib/types";
 
 
-export const filterMovesCurrent = (data: Pokemon) => {
-  const moves = data.moves.filter(
+export const filterMovesCurrent = (moves: Move[]) => {
+  const filteredMoves = moves.filter(
     (move) =>
       move.version_group_details.filter(
         (obj: { version_group: { name: string } }) =>
@@ -12,7 +12,7 @@ export const filterMovesCurrent = (data: Pokemon) => {
       ).length > 0
   );
 
-  return moves;
+  return filteredMoves;
 };
 
 

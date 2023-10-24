@@ -3,7 +3,8 @@
 
 import raltsDex from "../bulbasaurSpecies.json";
 import raltsMain from "../bulbasaurMain.json";
-import raltsEvo from "../bulbasaurEvo.json";
+import raltsEvo from "../raltsEvo.json";
+import bulbasaurEncounter from "../bulbasaurEncounter.json";
 import { Pokemon, Move, EvolutionChains, EvolutionChain, EvolutionDetails, FilteredDetails } from "../lib/types";
 
 
@@ -28,6 +29,13 @@ export const getEvolutionInfo = async (name: string) => {
   return evolutionChains;
 };
 
+export const getEncounterInfo = async (num: number) => {
+
+  // const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}/encounters`);
+  // const encounterInfo = await res.json();
+  const encounterInfo = await bulbasaurEncounter;
+  return encounterInfo;
+}
 export const getUrlNumber = (url: string) => {
   const urlArray = url.split("/");
   const urlNumber = urlArray[urlArray.length - 2];
