@@ -8,6 +8,7 @@ import { filterNoiseFromDexEntry } from "@/app/lib/filters";
 import { Main } from "@/app/components/ThemedElements";
 import { decimetersToFeet, hectogramsToLbs } from "@/app/lib/math";
 import EvolutionBox from "@/app/components/EvolutionBox";
+import AbilitiesBox from "@/app/components/AbilitiesBox";
 export default async function () {
   const pokemon = await getPokemon();
   const dexInfo = await getSpeciesInfo(pokemon.name);
@@ -32,7 +33,7 @@ export default async function () {
   const styles = {
     main: `flex flex-col  justify-between min-h-screen h-fit px-10 lg:px-20  bg-${types[0]}-l`,
     box1: `flex flex-col items-center justify-start md:py-20 w-full md:w-1/2 min-h-screen  h-fit  bg-${types[0]} text-xl`,
-    box2: `flex flex-col items-center w-full md:w-1/2 min-h-screen h-fit  md:mt-20  bg-${types[1]} text-white text-xl`,
+    box2: `flex flex-col items-center gap-10 w-full md:w-1/2 min-h-screen h-fit  md:mt-20  bg-${types[1]} text-white text-xl`,
     pokeName: ` text-5xl  capitalize w-full p-5    text-${types[0]}-l  bg-${types[0]}-d `,
     InfoBox: `flex flex-col items-center w-80 h-80 p-5 border-t border-black/50    text-${types[0]}-d bg-${types[0]}-l`,
     type1Box: `flex flex-col items-center justify-center w-1/2 h-1/2 p-5 text-2xl bg-${types[0]}-d text-${types[0]}-l capitalize `,
@@ -73,6 +74,7 @@ export default async function () {
           <div className={styles.descriptionBox}>
             <p>{dexEntry}</p>
           </div>
+          <AbilitiesBox abilities={pokemon.abilities} type={types[1]} />
           <EvolutionBox className={styles.evoBox} name={pokemon.name} />
         </div>
       </div>
