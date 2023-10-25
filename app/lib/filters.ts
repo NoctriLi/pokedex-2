@@ -1,8 +1,11 @@
-import { Pokemon } from "../lib/types";
-import { Move } from "../lib/types";
+import { Pokemon } from "./types";
+import { Move } from "./types";
 
 
 export const filterMovesCurrent = (moves: Move[]) => {
+  if (!moves) {
+    return [];
+  }
   const filteredMoves = moves.filter(
     (move) =>
       move.version_group_details.filter(

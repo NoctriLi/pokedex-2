@@ -1,21 +1,28 @@
-import MoveTable from "../../components/MoveTable";
+
+import MoveTable from "../components/MoveTable";
 import {
   getPokemon,
   getSpeciesInfo,
   getEvolutionInfo,
-} from "../../lib/getters";
-import { filterNoiseFromDexEntry } from "@/app/lib/filters";
-import { decimetersToFeet, hectogramsToLbs } from "@/app/lib/math";
-import EvolutionBox from "@/app/components/EvolutionBox";
-import AbilitiesBox from "@/app/components/AbilitiesBox";
-import HeldItemsBox from "@/app/components/HeldItemsBox";
-import StatsBox from "@/app/components/StatsBox";
-export default async function () {
-  const pokemon = await getPokemon();
+} from "../lib/getters";
+import { filterNoiseFromDexEntry } from "../lib/filters";
+import { decimetersToFeet, hectogramsToLbs } from "../lib/math";
+import EvolutionBox from "../components/EvolutionBox";
+import AbilitiesBox from "../components/AbilitiesBox";
+import HeldItemsBox from "../components/HeldItemsBox";
+import StatsBox from "../components/StatsBox";
+
+
+const Page = async ({params}: {params: {pokemon: string}}) => {
+  const pokemon = await getPokemon(params.pokemon);
+  if (!pokemon) {
+    return <div>Not Found!</div>;
+  }
   const dexInfo = await getSpeciesInfo(pokemon.name);
   const genus =
     dexInfo.genera.find((genus) => genus.language.name === "en")?.genus ||
     "Unknown Pokemon";
+
   const dexEntry = filterNoiseFromDexEntry(
     dexInfo.flavor_text_entries.find((entry) => entry.language.name === "en")
       ?.flavor_text || "Unknown Pokemon"
@@ -49,7 +56,7 @@ export default async function () {
     moveTableWrapper: `flex flex-col items-center justify-center w-full max-w-5xl h-auto mx-auto text-xl`,
   };
 
-  const keys = Object.keys(pokemon);
+
 
   return (
     <main className={styles.main}>
@@ -93,19 +100,4 @@ export default async function () {
     </main>
   );
 }
-
-// <div className="flex justify-evenly items-center w-full h-1/4 text-white">
-//   <div className="flex flex-col justify-center w-fit h-fit rounded bg-black p-5">
-//     <h1 className=" font-bold text-5xl text-center">Kadabra #37</h1>
-//   </div>
-// </div>
-
-// <div className="flex flex-col items-center justify-center w-full h-1/3 text-white">
-//   <div className="flex flex-col justify-center w-1/4 container h-full rounded bg-pred border border-black p-5">
-//     <img
-//       src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/64.png"
-//       alt="kadabra"
-//       className="object-contain h-full bg-pbrown border border-black"
-//     />
-//   </div>
-// </div>
+export default Page;

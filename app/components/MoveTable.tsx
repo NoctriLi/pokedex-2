@@ -1,4 +1,4 @@
-import React from "react";
+
 import { filterSVMoves, filterMovesCurrent } from "../lib/filters";
 import { sortMovesByLevel } from "../lib/sorters";
 import { Move, Pokemon } from "../lib/types";

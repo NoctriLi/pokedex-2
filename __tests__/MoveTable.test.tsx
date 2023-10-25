@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import dummy from "../app/dummy.json";
-import MoveTable from "../app/components/MoveTable";
+import MoveTable from "../components/MoveTable";
 import "@testing-library/jest-dom";
 
 describe("MoveTable", () => {

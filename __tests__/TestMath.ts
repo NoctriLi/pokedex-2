@@ -1,5 +1,5 @@
 
-import { decimetersToFeet, hectogramsToLbs } from "@/app/lib/math";
+import { decimetersToFeet, hectogramsToLbs } from "@/lib/math";
 import "@testing-library/jest-dom";
 
 describe("converts decimeters(unit input from API) to feet", () => {

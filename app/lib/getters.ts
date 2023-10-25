@@ -3,14 +3,27 @@
 
 import raltsDex from "../bulbasaurSpecies.json";
 import raltsMain from "../bulbasaurMain.json";
-import raltsEvo from "../raltsEvo.json";
+import raltsEvo from "../bulbasaurEvo.json";
 import bulbasaurEncounter from "../bulbasaurEncounter.json";
-import { Pokemon, Move, EvolutionChains, EvolutionChain, EvolutionDetails, FilteredDetails } from "../lib/types";
+import pokemon from "../pokemon.json";
+import { Pokemon, Move, EvolutionChains, EvolutionChain, EvolutionDetails, FilteredDetails } from "./types";
 
 
-export const getPokemon = async () => {
-  // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
+export const getAllPokemon = async () => {
+    // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
   // const pokemon = await res.json();
+  const poke = await pokemon;
+
+  return poke;
+}
+
+export const getPokemon = async (name: string) => {
+  // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
+  // if(!res.ok) {
+  //   return;
+  // }
+  // const pokemon = await res.json();
+
   const pokemon = await raltsMain;
 
   return pokemon;
@@ -49,6 +62,10 @@ export const getPokePicFromNumber = (number: string) => {
 
 
 
+
+
+
+///in-house helpers 
 const getEvolutionChains = (evolutionChain: EvolutionChain) => {
 
 
@@ -94,8 +111,6 @@ const getEvolutionChains = (evolutionChain: EvolutionChain) => {
   console.log(evolutionChainArray)
   return evolutionChainArray;
 };
-
-
 
 
 const filterEvolutionDetails = (evolutionDetails: EvolutionDetails) => {

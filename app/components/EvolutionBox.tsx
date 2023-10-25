@@ -1,8 +1,8 @@
-import { get } from "http";
 import { getEvolutionInfo } from "../lib/getters";
-import {
-  Key,
-} from "react";
+import { Key } from "react";
+const createLink = (number: number | string) => {
+  return `/${number}`;
+};
 
 const EvolutionBox = async ({
   name,
@@ -15,7 +15,7 @@ const EvolutionBox = async ({
 
   return (
     <div className={className}>
-      <h1 className="font-bold text-3xl sm:text-5xl">Evolutions:</h1>
+      <h1 className="py-5 font-bold text-3xl sm:text-5xl">Evolutions:</h1>
       {evolutionsArray?.map((obj, key) => {
         return (
           <div
@@ -37,7 +37,7 @@ const EvolutionBox = async ({
                     key={key2}
                     className="flex flex-col items-center justify-between w-fit h-full "
                   >
-                    {obj2.evolutionDetails !== null && (
+                    {obj2.evolutionDetails !== null ? (
                       <div className="flex flex-col items-center justify-center w-fit h-fit">
                         {key > 0 && (
                           <svg
@@ -55,40 +55,50 @@ const EvolutionBox = async ({
                               />
                               <path
                                 stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="1.5"
                                 d="m18 14l-6 6l-6-6"
                               />
                             </g>
                           </svg>
-                        )}                      
+                        )}
                         <a
-                      href={`/pokemon/${obj2.number}`} className="capitalize text-xl font-bold p-2 underline">
-                        {obj2.name}
-                      </a>
+                          href={createLink(obj2.number)}
+                          className="capitalize text-xl font-bold p-2 underline"
+                        >
+                          {obj2.name}
+                        </a>
                         <h2 className="text-lg font-semibold">Trigger: </h2>
                         <p className="text-sm capitalize">
                           {obj2.evolutionDetails[1]}
                         </p>
                       </div>
+                    ) : (
+                      <a
+                        href={createLink(obj2.number)}
+                        className="capitalize text-xl font-bold p-2 underline"
+                      >
+                        {obj2.name}
+                      </a>
                     )}
                     <div className="flex flex-col items-center justify-center w-fit h-fit p-2">
                       {obj2.evolutionDetails !== null && (
                         <>
                           <h2 className="text-lg font-semibold">Conditions:</h2>
                           {obj2.evolutionDetails[0].map((item) => (
-                            <p className="text-sm capitalize">{item.replace("-", " ")}</p>
+                            <p className="text-sm capitalize">
+                              {item.replace("-", " ")}
+                            </p>
                           ))}
                         </>
                       )}
                     </div>
 
                     <a
-                      href={`/pokemon/${obj2.number}`}
+                      href={createLink(obj2.number)}
                       className="flex flex-col items-center justify-center w-full  h-auto "
                     >
-
                       <img
                         src={obj2.picUrl}
                         alt={obj2.name}

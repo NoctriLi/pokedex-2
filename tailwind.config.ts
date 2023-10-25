@@ -27,7 +27,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--theme3) / <alpha-value>)",
         },
         normal: {
-          DEFAULT: "hsl(var(normal--) / <alpha-value>)",
+          DEFAULT: "hsl(var(--normal) / <alpha-value>)",
           l: "hsl(var(--normal-l) / <alpha-value>)",
           d: "hsl(var(--normal-d) / <alpha-value>)",
         },
