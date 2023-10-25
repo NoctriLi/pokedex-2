@@ -5,17 +5,18 @@ const createLink = (number: number | string) => {
 };
 
 const EvolutionBox = async ({
-  name,
+  evoChainNum,
   className,
 }: {
-  name: string;
+  evoChainNum: string | number;
   className: string;
 }) => {
-  const evolutionsArray = await getEvolutionInfo(name);
-
+  const evolutionsArray = await getEvolutionInfo(evoChainNum);
+console.log(evolutionsArray)
   return (
     <div className={className}>
       <h1 className="py-5 font-bold text-3xl sm:text-5xl">Evolutions:</h1>
+      {!evolutionsArray && (<h1>None</h1>)}
       {evolutionsArray?.map((obj, key) => {
         return (
           <div

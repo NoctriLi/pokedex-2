@@ -9,34 +9,38 @@ import pokemon from "../pokemon.json";
 import { Pokemon, Move, EvolutionChains, EvolutionChain, EvolutionDetails, FilteredDetails } from "./types";
 
 
-export const getAllPokemon = async () => {
+export const getAllPokemon = () => {
     // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
   // const pokemon = await res.json();
-  const poke = await pokemon;
+  const poke = pokemon;
 
   return poke;
 }
 
-export const getPokemon = async (name: string) => {
-  // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
-  // if(!res.ok) {
-  //   return;
-  // }
-  // const pokemon = await res.json();
+export const getPokemon = async (name: string | number) => {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  if(!res.ok) {
+    return;
+  }
+  const pokemon = await res.json();
 
-  const pokemon = await raltsMain;
+  // const pokemon = await raltsMain;
 
   return pokemon;
 };
 
 export const getSpeciesInfo = async (name: string) => {
-  const info = await raltsDex;
-  const evos = getEvolutionInfo(name);
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
+  const info = await res.json();
+  // const info = await raltsDex;
+  // const evos = getEvolutionInfo(name);
   return info;
 };
 
-export const getEvolutionInfo = async (name: string) => {
-  const info: EvolutionChains = await raltsEvo;
+export const getEvolutionInfo = async (num: number | string) => {
+const res = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${num}`);
+  const info = await res.json();
+  // const info: EvolutionChains = await raltsEvo;
   const evolutionChains = getEvolutionChains(info.chain);
   console.log(evolutionChains);
   return evolutionChains;
@@ -44,9 +48,9 @@ export const getEvolutionInfo = async (name: string) => {
 
 export const getEncounterInfo = async (num: number) => {
 
-  // const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}/encounters`);
-  // const encounterInfo = await res.json();
-  const encounterInfo = await bulbasaurEncounter;
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}/encounters`);
+  const encounterInfo = await res.json();
+  // const encounterInfo = await bulbasaurEncounter;
   return encounterInfo;
 }
 export const getUrlNumber = (url: string) => {
