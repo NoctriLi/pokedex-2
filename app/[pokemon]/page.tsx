@@ -14,7 +14,6 @@ import StatsBox from "../components/StatsBox";
 
 const Page = async ({ params }: { params: { pokemon: string } }) => {
   const pokemon = await getPokemon(params.pokemon);
-  console.log(pokemon);
   if (!pokemon) {
     return (
       <div className="flex items-center justify-center w-full h-screen text-3xl font-bold bg-electric">
@@ -22,24 +21,26 @@ const Page = async ({ params }: { params: { pokemon: string } }) => {
       </div>
     );
   }
+
   const dexInfo = await getSpeciesInfo(pokemon.name);
   const evoChain = getUrlNumber(dexInfo.evolution_chain.url);
   const genus =
-    dexInfo.genera.find((genus) => genus.language.name === "en")?.genus ||
+    dexInfo.genera.find((genus: { language: { name: string; }; }) => genus.language.name === "en")?.genus ||
     "Unknown Pokemon";
 
   const dexEntry = filterNoiseFromDexEntry(
-    dexInfo.flavor_text_entries.find((entry) => entry.language.name === "en")
+    dexInfo.flavor_text_entries.find((entry: { language: { name: string; }; }) => entry.language.name === "en")
       ?.flavor_text || "Unknown Pokemon"
   );
   const weight = hectogramsToLbs(pokemon.weight);
   const height = decimetersToFeet(pokemon.height);
-  const types = pokemon.types.map((type) => type.type.name);
+  const types = pokemon.types.map((type: { type: { name: any; }; }) => type.type.name);
+
+
   if (types.length === 1) {
     types.push(types[0]);
   }
 
-  console.log(types);
 
   const styles = {
     main: `flex flex-col gap-10 justify-between min-h-screen h-fit sm:px-10 lg:px-20 mt-20  bg-${types[0]}-l`,
@@ -50,7 +51,7 @@ const Page = async ({ params }: { params: { pokemon: string } }) => {
     imageBox: `flex flex-col items-center justify-center sm:w-80 h-80`,
     image: `object-contain h-full `,
     pokeName: ` text-5xl  capitalize w-full p-5    text-${types[0]}-l  bg-${types[0]}-d `,
-    infoBox: `flex flex-col items-center w-full sm:w-80 h-80 p-5 border-t border-black/50    text-${types[0]}-d bg-${types[0]}-l`,
+    infoBox: `flex flex-col items-center w-full sm:w-80 h-60 p-5 border-t border-black/50    text-${types[0]}-d bg-${types[0]}-l`,
     infoDesc: `text-xl py-5`,
     typeWrapper: `flex justify-center w-full`,
     infoBoxText: `text-xl`,
