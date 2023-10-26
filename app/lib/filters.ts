@@ -11,7 +11,7 @@ export const filterMovesCurrent = (moves: Move[]) => {
         (obj: { version_group: { name: string } }) =>
           obj.version_group.name === "scarlet-violet" ||
           obj.version_group.name === "sword-shield" ||
-          obj.version_group.name === "x-y"
+          obj.version_group.name === "sun-moon"
       ).length > 0
   );
 
@@ -23,7 +23,7 @@ export const filterSVMoves = (move: Move) => {
     (obj) =>
       obj.version_group.name === "scarlet-violet" ||
       obj.version_group.name === "sword-shield" ||
-      obj.version_group.name === "x-y"
+      obj.version_group.name === "sun-moon"
   );
 
   return svMoveData[0];
