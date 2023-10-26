@@ -1,4 +1,4 @@
-import { Pokemon } from "./types";
+
 import { Move } from "./types";
 
 export const filterMovesCurrent = (moves: Move[]) => {
@@ -10,7 +10,8 @@ export const filterMovesCurrent = (moves: Move[]) => {
       move.version_group_details.filter(
         (obj: { version_group: { name: string } }) =>
           obj.version_group.name === "scarlet-violet" ||
-          obj.version_group.name === "sword-shield"
+          obj.version_group.name === "sword-shield" ||
+          obj.version_group.name === "x-y"
       ).length > 0
   );
 
