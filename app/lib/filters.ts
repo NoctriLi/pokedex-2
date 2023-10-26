@@ -29,7 +29,7 @@ export const filterSVMoves = (move: Move) => {
 
 export const filterNoiseFromDexEntry = (data: string) => {
   const string = data;
-  console.log(string);
+
   const cleanEntry = string
     .replace("\f", "\n")
     .replace("\u00ad\n", "")
@@ -37,6 +37,6 @@ export const filterNoiseFromDexEntry = (data: string) => {
     .replace(" -\n", " - ")
     .replace("-\n", "-")
     .replace("\n", " ");
-  console.log(cleanEntry);
+
   return cleanEntry;
 };
