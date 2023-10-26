@@ -21,7 +21,8 @@ export const filterSVMoves = (move: Move) => {
   const svMoveData = move.version_group_details.filter(
     (obj) =>
       obj.version_group.name === "scarlet-violet" ||
-      obj.version_group.name === "sword-shield"
+      obj.version_group.name === "sword-shield" ||
+      obj.version_group.name === "x-y"
   );
 
   return svMoveData[0];
