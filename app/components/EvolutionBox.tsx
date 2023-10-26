@@ -14,15 +14,14 @@ const EvolutionBox = async ({
   return (
     <div className={className}>
       <h1 className="py-5 font-bold text-3xl sm:text-5xl">Evolutions:</h1>
-      {!evolutionsArray && (<h1>None</h1>)}
+      {!evolutionsArray && <h1>None</h1>}
       {evolutionsArray?.map((obj, key) => {
         return (
           <div
             key={key}
             className="flex items-start justify-center w-fit h-fit overflow-hidden"
           >
-            <EvolutionItem evolution={obj} num={key}/>
-
+            <EvolutionItem evolution={obj} num={key} />
           </div>
         );
       })}
@@ -31,6 +30,3 @@ const EvolutionBox = async ({
 };
 
 export default EvolutionBox;
-
-
-

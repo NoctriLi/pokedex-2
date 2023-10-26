@@ -1,25 +1,20 @@
 // import dummy from "../dummy.json";
 // import dummy2 from "../dummy2.json";
 
-import raltsDex from "../bulbasaurSpecies.json";
-import raltsMain from "../bulbasaurMain.json";
-import raltsEvo from "../bulbasaurEvo.json";
-import bulbasaurEncounter from "../bulbasaurEncounter.json";
 import pokemon from "../pokemon.json";
-import { Pokemon, Move, EvolutionChains, EvolutionChain, EvolutionDetails, FilteredDetails } from "./types";
-
+import { EvolutionChain, EvolutionDetails, FilteredDetails } from "./types";
 
 export const getAllPokemon = () => {
-    // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
+  // const res = await fetch("https://pokeapi.co/api/v2/pokemon/37");
   // const pokemon = await res.json();
   const poke = pokemon;
 
   return poke;
-}
+};
 
 export const getPokemon = async (name: string | number) => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-  if(!res.ok) {
+  if (!res.ok) {
     return;
   }
   const pokemon = await res.json();
@@ -38,21 +33,22 @@ export const getSpeciesInfo = async (name: string) => {
 };
 
 export const getEvolutionInfo = async (num: number | string) => {
-const res = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${num}`);
+  const res = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${num}`);
   const info = await res.json();
   // const info: EvolutionChains = await raltsEvo;
   const evolutionChains = getEvolutionChains(info.chain);
-  console.log(evolutionChains);
+
   return evolutionChains;
 };
 
 export const getEncounterInfo = async (num: number) => {
-
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}/encounters`);
+  const res = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${num}/encounters`
+  );
   const encounterInfo = await res.json();
   // const encounterInfo = await bulbasaurEncounter;
   return encounterInfo;
-}
+};
 export const getUrlNumber = (url: string) => {
   const urlArray = url.split("/");
   const urlNumber = urlArray[urlArray.length - 2];
@@ -64,34 +60,28 @@ export const getPokePicFromNumber = (number: string) => {
   return url;
 };
 
-
-
-
-
-
-///in-house helpers 
+///in-house helpers
 const getEvolutionChains = (evolutionChain: EvolutionChain) => {
+  const array: (
+    | {
+        name: string;
+        number: string;
+        picUrl: string; // import dummy2 from "../dummy2.json";
+        evolves_to: any[] | undefined;
+        evolutionDetails: any[];
+      }[]
+    | { name: string; number: string; picUrl: string; evolutionDetails: null }[]
+  )[] = [];
 
-
-  const array: ({
-    name: string; number: string; picUrl // import dummy2 from "../dummy2.json";
-      : string; evolves_to: any[] | undefined; evolutionDetails: any[];
-  }[] | { name: string; number: string; picUrl: string; evolutionDetails: null; }[])[] = []
-  
-
-
-
-  const getEvo = (evolutionChain:EvolutionChain ) => {
+  const getEvo = (evolutionChain: EvolutionChain) => {
     if (!evolutionChain.evolves_to[0]) {
-      console.log(array);
       return;
     }
-    console.log(evolutionChain);
-    
+
     const arr = evolutionChain.evolves_to.map((chain, i) => {
-    const number = getUrlNumber(chain.species.url);
-    const picUrl = getPokePicFromNumber(number);
-       return {
+      const number = getUrlNumber(chain.species.url);
+      const picUrl = getPokePicFromNumber(number);
+      return {
         name: evolutionChain.evolves_to[i].species.name,
         number: number,
         picUrl: picUrl,
@@ -99,27 +89,32 @@ const getEvolutionChains = (evolutionChain: EvolutionChain) => {
         evolutionDetails: filterEvolutionDetails(
           evolutionChain.evolves_to[i].evolution_details[0]
         ),
-      }
-    }
-    );
-    array.unshift(arr)
+      };
+    });
+    array.unshift(arr);
     return array;
   };
   const evolutionChainArray = getEvo(evolutionChain);
-  array.unshift([{
+  array.unshift([
+    {
       name: evolutionChain.species.name,
       number: getUrlNumber(evolutionChain.species.url),
       picUrl: getPokePicFromNumber(getUrlNumber(evolutionChain.species.url)),
       evolutionDetails: null,
-    }])
-  console.log(evolutionChainArray)
+    },
+  ]);
+
   return evolutionChainArray;
 };
 
-
 const filterEvolutionDetails = (evolutionDetails: EvolutionDetails) => {
   const filteredDetails: FilteredDetails = {
-    gender: evolutionDetails.gender === 2 ? "Male" : evolutionDetails.gender === 1? "Female" : null,
+    gender:
+      evolutionDetails.gender === 2
+        ? "Male"
+        : evolutionDetails.gender === 1
+        ? "Female"
+        : null,
     held_item: evolutionDetails.held_item?.name || null,
     item: evolutionDetails.item?.name || null,
     known_move:
@@ -174,7 +169,9 @@ const filterEvolutionDetails = (evolutionDetails: EvolutionDetails) => {
     turn_upside_down:
       (evolutionDetails.turn_upside_down && "Turn upside down ") || null,
   };
-  const filteredKeys = Object.keys(filteredDetails) as (keyof typeof filteredDetails)[];
+  const filteredKeys = Object.keys(
+    filteredDetails
+  ) as (keyof typeof filteredDetails)[];
   const validKeys = filteredKeys.filter((key) => filteredDetails[key] !== null);
   const keyValues = validKeys.map((key) => filteredDetails[key]);
   const trigger =

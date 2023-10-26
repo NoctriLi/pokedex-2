@@ -25,22 +25,24 @@ const Page = async ({ params }: { params: { pokemon: string } }) => {
   const dexInfo = await getSpeciesInfo(pokemon.name);
   const evoChain = getUrlNumber(dexInfo.evolution_chain.url);
   const genus =
-    dexInfo.genera.find((genus: { language: { name: string; }; }) => genus.language.name === "en")?.genus ||
-    "Unknown Pokemon";
+    dexInfo.genera.find(
+      (genus: { language: { name: string } }) => genus.language.name === "en"
+    )?.genus || "Unknown Pokemon";
 
   const dexEntry = filterNoiseFromDexEntry(
-    dexInfo.flavor_text_entries.find((entry: { language: { name: string; }; }) => entry.language.name === "en")
-      ?.flavor_text || "Unknown Pokemon"
+    dexInfo.flavor_text_entries.find(
+      (entry: { language: { name: string } }) => entry.language.name === "en"
+    )?.flavor_text || "Unknown Pokemon"
   );
   const weight = hectogramsToLbs(pokemon.weight);
   const height = decimetersToFeet(pokemon.height);
-  const types = pokemon.types.map((type: { type: { name: any; }; }) => type.type.name);
-
+  const types = pokemon.types.map(
+    (type: { type: { name: any } }) => type.type.name
+  );
 
   if (types.length === 1) {
     types.push(types[0]);
   }
-
 
   const styles = {
     main: `flex flex-col gap-10 justify-between min-h-screen h-fit sm:px-10 lg:px-20 mt-20  bg-${types[0]}-l`,

@@ -1,4 +1,3 @@
-
 import { render, screen } from "@testing-library/react";
 import MoveTable from "@/app/components/MoveTable";
 import { filterSVMoves, filterMovesCurrent } from "@/app/lib/filters";
@@ -7,23 +6,18 @@ import "@testing-library/jest-dom";
 
 import moves from "./dummy2.json";
 
-
 describe("MoveTable", () => {
   const filteredMoves = sortMovesByLevel(filterMovesCurrent(moves));
 
-
-
-  it("should have expanding-force",  () => {
-    
-     render(<MoveTable moves={moves} type={"psychic"} />);
+  it("should have expanding-force", () => {
+    render(<MoveTable moves={moves} type={"psychic"} />);
 
     const myElement = screen.getByText("expanding force");
 
     expect(myElement).toBeInTheDocument();
   });
 
-  it("should render the correct number of rows",  () => {
-
+  it("should render the correct number of rows", () => {
     render(<MoveTable moves={moves} type={"psychic"} />);
 
     const rows = screen.getAllByRole("row");
@@ -32,37 +26,31 @@ describe("MoveTable", () => {
     expect(rows.length).toBe(filteredMoves.length + 1); // +1 for the table header row
   });
 
-  it("should render the correct move names",  () => {
-
-     render(<MoveTable moves={moves} type={"psychic"} />);
+  it("should render the correct move names", () => {
+    render(<MoveTable moves={moves} type={"psychic"} />);
 
     filteredMoves.forEach((move) => {
-      
       const moveName = move.move.name.replace("-", " ");
-      console.log(moveName)
+      console.log(moveName);
       const myElement = screen.getByText(moveName);
 
       expect(myElement).toBeInTheDocument();
     });
   });
 
-  it("should render the correct move learn methods",  () => {
+  it("should render the correct move learn methods", () => {
+    render(<MoveTable moves={moves} type={"psychic"} />);
 
-     render(<MoveTable moves={moves} type={"psychic"} />, );
-
-    const methods = ["level up", "tutor", "machine"]
+    const methods = ["level up", "tutor", "machine"];
     methods.forEach((move) => {
-  
       const myElement = screen.getAllByText(move);
-
 
       expect(myElement[0]).toBeInTheDocument();
     });
   });
 
-  it("should render the correct move levels",  () => {
-
-     render(<MoveTable moves={moves} type={"psychic"} />);
+  it("should render the correct move levels", () => {
+    render(<MoveTable moves={moves} type={"psychic"} />);
 
     filteredMoves.forEach((move) => {
       const latestMoves = filterSVMoves(move);

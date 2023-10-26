@@ -36,14 +36,20 @@ export type Pokemon = {
     front_shiny?: string | null;
     front_shiny_female?: string | null;
     other: {
-      dream_world?: { front_default: string | null; front_female?: string  | null;};
+      dream_world?: {
+        front_default: string | null;
+        front_female?: string | null;
+      };
       home: {
         front_default: string | null;
         front_female: string | null;
         front_shiny: string | null;
         front_shiny_female: string | null;
       };
-      "official-artwork": { front_default: string | null; front_shiny: string | null; };
+      "official-artwork": {
+        front_default: string | null;
+        front_shiny: string | null;
+      };
     };
     versions: {
       "generation-i": {
@@ -277,10 +283,9 @@ export interface EvolutionChains {
   id: number;
 }
 
-
 export type FilteredDetails = {
   gender?: string | null;
-  held_item?:  string | null;
+  held_item?: string | null;
   item?: string | null;
   known_move?: string | null;
   known_move_type?: string | null;
@@ -295,6 +300,6 @@ export type FilteredDetails = {
   party_type?: string | null;
   relative_physical_stats?: string | null;
   time_of_day?: string | null;
-  trade?:  string | null;
+  trade?: string | null;
   turn_upside_down?: string | null;
 };
