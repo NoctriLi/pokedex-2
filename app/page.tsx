@@ -18,7 +18,8 @@ const styles = {
 export default async function Home() {
   const pokemon = await getAllPokemon();
   const maxNum = 1017; // 1017 is the last actual pokemon, the api has extra forms as entries
-  const randomNumGenerator = () => Math.floor(Math.random() * maxNum);
+  const minNum = 1; // 1 is the first pokemon
+  const randomNumGenerator = () => Math.floor(Math.random() * (maxNum - minNum) + minNum );
   let randomNum = randomNumGenerator();
   if (randomNum === 0) randomNum = 1;
 
