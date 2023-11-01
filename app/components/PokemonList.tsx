@@ -29,7 +29,7 @@ const PokemonList = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center gap-2 p-2  h-full w-40 ">
+    <div className="flex flex-col justify-center gap-3 p-2  h-fit w-full ">
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-evenly w-20 h-fit p-2 bg-fire-l rounded text-center cursor-pointer"
@@ -50,12 +50,12 @@ const PokemonList = () => {
         </motion.svg>
       </div>
       <motion.ol
-        layout="size"
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1 }}
+
+        transition={{ duration: 0.2 }}
         type="1"
-        className="flex flex-col gap-3 py-2 h-96 max-h-96 md:w-[400px] lg:w-[500px] 0 bg-electric-l/90 overflow-y-scroll"
-        style={{ display: isOpen ? "block" : "none" }}
+        className="flex flex-col gap-3  h-96 max-h-96 md:w-[400px] lg:w-[500px] bg-electric-l/90 overflow-y-scroll"
+        animate={isOpen ? "open" : "closed"}
+        variants={{"open":{height:"24rem"}, "closed":{height: "0px"}}}
       >
         {PokemonList}
       </motion.ol>

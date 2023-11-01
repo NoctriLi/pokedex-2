@@ -1,4 +1,6 @@
 import MoveTable from "../components/MoveTable";
+
+
 import {
   getPokemon,
   getSpeciesInfo,
@@ -89,6 +91,7 @@ const Page = async ({ params }: { params: { pokemon: string } }) => {
             <p className={styles.infoBoxText}>Weight: {weight}</p>
             <p className={styles.infoBoxText}>Height: {height}</p>
           </div>
+          
           <StatsBox stats={pokemon.stats} type={types[0]} />
         </div>
         <div className={styles.box2}>
