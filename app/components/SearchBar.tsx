@@ -83,6 +83,7 @@ const SearchBar = () => {
       </div>
       <motion.div
         layout
+        initial="closed"
         animate={visible ? "open" : "closed"}
         variants={{
           open: { y: 0 },
