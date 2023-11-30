@@ -2,7 +2,6 @@ import { getAllPokemon } from "./lib/getters";
 
 import RandomPokemon from "./components/RandomPokemon";
 
-
 const styles = {
   main: `flex flex-col items-center justify-center gap-5 min-h-screen pt-20 px-10 bg-fire-l`,
   heading: `w-full max-w-2xl text-center text-lg sm:text-xl text-fire-d font-bold`,
@@ -11,22 +10,20 @@ const styles = {
   buttonWrapper: `flex items-center gap-2 w-full h-10 p-2`,
   pokedexFakeButton1: `w-6 h-6 bg-flying-l rounded-full border-2 border-white shadow-md shadow-black/30`,
   pokedexFakeButton2: `w-6 h-6 bg-electric rounded-full shadow-md shadow-black/30`,
-
 };
 
+const maxNum = 1017; // 1017 is the last actual pokemon, the api has extra forms as entries
+const minNum = 1; // 1 is the first pokemon
+const randomNumGenerator = () =>
+    Math.floor(Math.random() * (maxNum - minNum) + minNum);
 
 export default async function Home() {
   const pokemon = await getAllPokemon();
-  const maxNum = 1017; // 1017 is the last actual pokemon, the api has extra forms as entries
-  const minNum = 1; // 1 is the first pokemon
-  const randomNumGenerator = () => Math.floor(Math.random() * (maxNum - minNum) + minNum );
   let randomNum = randomNumGenerator();
+  
   if (randomNum === 0) randomNum = 1;
 
   const randomPokemon = pokemon.results[randomNum - 1];
-
-
-
 
   return (
     <main className={styles.main}>
