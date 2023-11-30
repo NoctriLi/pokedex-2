@@ -12,18 +12,10 @@ const styles = {
   pokedexFakeButton2: `w-6 h-6 bg-electric rounded-full shadow-md shadow-black/30`,
 };
 
-const maxNum = 1017; // 1017 is the last actual pokemon, the api has extra forms as entries
-const minNum = 1; // 1 is the first pokemon
-const randomNumGenerator = () =>
-    Math.floor(Math.random() * (maxNum - minNum) + minNum);
 
 export default async function Home() {
   const pokemon = await getAllPokemon();
-  let randomNum = randomNumGenerator();
   
-  if (randomNum === 0) randomNum = 1;
-
-  const randomPokemon = pokemon.results[randomNum - 1];
 
   return (
     <main className={styles.main}>
@@ -37,7 +29,7 @@ export default async function Home() {
           <div className={styles.pokedexFakeButton2}></div>
         </div>
         <div className={styles.pokedexScreen}>
-          <RandomPokemon name={randomPokemon.name} num={randomNum} />
+          <RandomPokemon pokemon={pokemon} />
         </div>
       </div>
     </main>

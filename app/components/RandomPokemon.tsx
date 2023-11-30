@@ -1,7 +1,28 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const RandomPokemon = ({ name, num }: { name: string; num: number }) => {
+const RandomPokemon = ({ pokemon }: { pokemon: any }) => {
+  const [randomNum, setRandomPokemon] = useState(1);
+
+  const maxNum = 1017; // 1017 is the last actual pokemon, the api has extra forms as entries
+  const minNum = 1; // 1 is the first pokemon
+
+  useEffect(() => {
+    const randomNumGenerator = () => {
+      if (randomNum === 0) setRandomPokemon(1);
+      else
+        setRandomPokemon(
+          Math.floor(Math.random() * (maxNum - minNum) + minNum)
+        );
+    };
+    randomNumGenerator();
+  }, []);
+
+  const randomPokemon = pokemon.results[randomNum - 1];
+  const name = randomPokemon.name;
+  const num = randomNum;
+
   let filteredName = name.replace("-", " ");
 
   const imageUrl =
