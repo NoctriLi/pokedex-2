@@ -14,7 +14,9 @@ import AbilitiesBox from "../components/AbilitiesBox";
 import HeldItemsBox from "../components/HeldItemsBox";
 import StatsBox from "../components/StatsBox";
 
-const Page = async ({ params }: { params: { pokemon: string } }) => {
+type PokemonParams = Promise<{ pokemon: string }>;
+
+const Page = async ({ params }: { params: PokemonParams }) => {
 
   const data = await params;
   const pokemon = await getPokemon(data.pokemon);
