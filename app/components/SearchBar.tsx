@@ -26,6 +26,20 @@ function useMenuAnimation(isOpen: boolean) {
 
   return scope;
 }
+const Path = (props: any) => {
+  return (
+    <path
+      suppressHydrationWarning
+      fill="transparent"
+      strokeWidth="3"
+      stroke="black"
+      strokeLinecap="round"
+    {...props}
+  />
+);
+}
+
+
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -121,12 +135,4 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-const Path = (props: any) => (
-  <path
-    fill="transparent"
-    strokeWidth="3"
-    stroke="black"
-    strokeLinecap="round"
-    {...props}
-  />
-);
+

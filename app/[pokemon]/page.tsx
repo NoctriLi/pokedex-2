@@ -15,7 +15,9 @@ import HeldItemsBox from "../components/HeldItemsBox";
 import StatsBox from "../components/StatsBox";
 
 const Page = async ({ params }: { params: { pokemon: string } }) => {
-  const pokemon = await getPokemon(params.pokemon);
+
+  const data = await params;
+  const pokemon = await getPokemon(data.pokemon);
   if (!pokemon) {
     return (
       <div className="flex items-center justify-center w-full h-screen text-3xl font-bold bg-electric">

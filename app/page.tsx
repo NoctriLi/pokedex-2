@@ -14,15 +14,18 @@ const styles = {
 
 
 export default async function Home() {
-  const pokemon = await getAllPokemon();
+  const pokemonList = await getAllPokemon();
+  let pokemon = pokemonList;
   
 
   return (
     <main className={styles.main}>
       <h1 className={styles.heading}>
-        Search for a pokemon using the methods above, or click below for a
-        random pokemon!
+        Search for a pokemon using the search bar above, or check out the random pokemon generated below!
       </h1>
+      <a href="/" className="text-yellow-300 p-2 *:hover:text-yellow-400 border border-yellow-300 rounded bg-red-900 shadow-md">
+        Random pokemon!
+      </a>
       <div className={styles.pokedexOuter}>
         <div className={styles.buttonWrapper}>
           <div className={styles.pokedexFakeButton1}></div>

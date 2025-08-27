@@ -39,6 +39,7 @@ const RandomPokemon = ({ pokemon }: { pokemon: any }) => {
       <h1 className="text-3xl font-bold capitalize text-center">
         {filteredName}
       </h1>
+      <h1 className="text-xl font-bold text-center">#{num}</h1>
     </Link>
   );
 };
